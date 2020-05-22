@@ -1,0 +1,41 @@
+<div class="excel__table" #table>
+  <div class="row">
+    <div class="row-info"></div>
+    <div class="row-data">
+      <div
+        (click)="highlightGroup($event.target, table)"
+        data-type="col"
+        *ngFor="let charCode of columns"
+        [ngClass]="['column', this.highlighter ? 'highliterHeader' : '']"
+      >
+        {{ charCode | fromCharCode }}
+      </div>
+    </div>
+  </div>
+
+  <div *ngFor="let row of rows" class="row">
+    <div
+      [ngClass]="['row-info', this.highlighter ? 'highliterHeader' : '']"
+      (click)="highlightGroup($event.target, table)"
+      data-type="row"
+      class="row-info"
+    >
+      {{ row }}
+    </div>
+
+    <div class="row-data">
+      <div
+        *ngFor="let _ of columns; let i = index"
+        (click)="selectCell(row, i + 1)"
+        [ngClass]="[isSelectedCell(row, i + 1) ? 'selected' : '', 'cell']"
+        contenteditable
+      ></div>
+    </div>
+  </div>
+
+  <div
+    [ngStyle]="this.highlighter"
+    *ngIf="this.highlighter"
+    class="highliter"
+  ></div>
+</div>

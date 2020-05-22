@@ -1,0 +1,72 @@
+$header-height: 34px;
+$toolbar-height: 40px;
+$formula-height: 24px;
+$info-cell-width: 40px;
+$cell-width: 120px;
+$row-height: 24px;
+$db-header-height: 64px;
+$border-color: #c0c0c0;
+$primary-color: #3c74ff;
+
+
+@mixin button($color: green) {
+  height: 24px;
+  min-width: 24px;
+  padding: 3px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  color: rgba(0, 0, 0, .7);
+
+  & i {
+    font-size: 18px;
+  }
+
+  &:active, &.active {
+    color: $color;
+  }
+
+  &:hover {
+    background: #eee;
+    cursor: pointer;
+  }
+}
+
+
+
+.excel__header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: $header-height;
+  padding: 8px 4px 0;
+  display: flex;
+  justify-content: space-between;
+
+  & .input {
+    margin: 0;
+    padding: 2px 7px;
+    min-width: 1px;
+    color: #000;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    height: 20px;
+    font-size: 18px;
+    line-height: 22px;
+    outline: none;
+
+    &:hover {
+      border: 1px solid $border-color;
+    }
+
+    &:focus {
+      border: 2px solid #1a73e8;
+    }
+  }
+
+  .button {
+    @include button(red);
+  }
+
+}

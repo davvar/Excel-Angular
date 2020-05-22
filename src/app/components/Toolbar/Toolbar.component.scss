@@ -1,0 +1,49 @@
+$header-height: 34px;
+$toolbar-height: 40px;
+$formula-height: 24px;
+$info-cell-width: 40px;
+$cell-width: 120px;
+$row-height: 24px;
+$db-header-height: 64px;
+$border-color: #c0c0c0;
+$primary-color: #3c74ff;
+
+
+@mixin button($color: green) {
+  height: 24px;
+  min-width: 24px;
+  padding: 3px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  color: rgba(0, 0, 0, .7);
+
+  & i {
+    font-size: 18px;
+  }
+
+  &:active, &.active {
+    color: $color;
+  }
+
+  &:hover {
+    background: #eee;
+    cursor: pointer;
+  }
+}
+
+.excel__toolbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: $header-height;
+  height: $toolbar-height;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  padding: 7px 10px;
+  display: flex;
+
+  .button {
+    @include button(green);
+  }
+}

@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Excel-Angular"
+    }
+  },
+  "defaultProject": "Excel-Angular",
+  "cli": {
+    "analytics": false
+  }
 }
