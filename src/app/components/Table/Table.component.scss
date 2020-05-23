@@ -67,7 +67,7 @@ $primary-color: #3c74ff;
 
     &.selected {
       border: none;
-      outline: 2px solid $primary-color;
+      border: 2px solid $primary-color;
       z-index: 2;
     }
   }
@@ -104,13 +104,13 @@ $primary-color: #3c74ff;
     }
   }
 
-  .highliter {
+  .highlighter {
     position: absolute;
     background-color: rgba(14, 101, 235, 0.1);
     border: 1px solid $primary-color;
   }
 
-  .highliterHeader {
+  .highlightHeader {
     background: rgba(0, 0, 0, 0.61);
     color: white;
   }

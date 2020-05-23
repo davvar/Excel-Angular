@@ -1,12 +1,16 @@
 <div class="excel__table" #table>
   <div class="row">
-    <div class="row-info"></div>
+    <div (click)="highlight($event.target, table)" class="row-info"></div>
     <div class="row-data">
       <div
-        (click)="highlightGroup($event.target, table)"
+        #colRef
+        (click)="highlight(colRef, table, prevCol + 1)"
         data-type="col"
-        *ngFor="let charCode of columns"
-        [ngClass]="['column', this.highlighter ? 'highliterHeader' : '']"
+        *ngFor="let charCode of columns; let prevCol = index"
+        [ngClass]="[
+          'column',
+          shouldHighlight(colRef, prevCol + 1) ? 'highlightHeader' : ''
+        ]"
       >
         {{ charCode | fromCharCode }}
       </div>
@@ -15,10 +19,13 @@
 
   <div *ngFor="let row of rows" class="row">
     <div
-      [ngClass]="['row-info', this.highlighter ? 'highliterHeader' : '']"
-      (click)="highlightGroup($event.target, table)"
+      #rowRef
+      (click)="highlight(rowRef, table, row)"
+      [ngClass]="[
+        'row-info',
+        shouldHighlight(rowRef, row) ? 'highlightHeader' : ''
+      ]"
       data-type="row"
-      class="row-info"
     >
       {{ row }}
     </div>
@@ -28,14 +35,16 @@
         *ngFor="let _ of columns; let i = index"
         (click)="selectCell(row, i + 1)"
         [ngClass]="[isSelectedCell(row, i + 1) ? 'selected' : '', 'cell']"
+        data-type="cell"
         contenteditable
       ></div>
     </div>
   </div>
 
   <div
-    [ngStyle]="this.highlighter"
-    *ngIf="this.highlighter"
-    class="highliter"
+    [ngStyle]="highlighter.styles"
+    *ngIf="highlighter.styles"
+    data-type="highlighter"
+    class="highlighter"
   ></div>
 </div>
