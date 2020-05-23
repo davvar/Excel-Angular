@@ -13,6 +13,13 @@
         ]"
       >
         {{ charCode | fromCharCode }}
+        <div
+          [ngStyle]="resizer.styles"
+          (mousedown)="resizer.startResizing($event, table)"
+          data-direction="X"
+          class="col-resize"
+        >
+        </div>
       </div>
     </div>
   </div>
@@ -28,6 +35,7 @@
       data-type="row"
     >
       {{ row }}
+      <div data-direction="Y" class="row-resize"><div></div></div>
     </div>
 
     <div class="row-data">

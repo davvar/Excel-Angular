@@ -16,7 +16,7 @@ import { NotFoundPageModule } from './pages/NotFoundPage/NotFoundPage.module';
     AppRoutingModule,
     ExcelPageModule,
     DashboardPageModule,
-    NotFoundPageModule
+    NotFoundPageModule,
   ],
   providers: [],
   bootstrap: [

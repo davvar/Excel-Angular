@@ -1,6 +1,9 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { fromEvent, merge, Observable } from 'rxjs';
+
 import { TableHighlightService } from 'src/app/services/tableHighlight.service';
+
+import { TableResizeService } from 'src/app/services/tableResize.service';
 
 @Component({
   selector: 'app-table',
@@ -21,7 +24,8 @@ export class TableComponent implements AfterViewInit {
   private tableEvents$: Observable<MouseEvent>
 
   constructor(
-    public highlighter: TableHighlightService
+    public highlighter: TableHighlightService,
+    public resizer: TableResizeService,
   ) { }
 
   ngAfterViewInit() {

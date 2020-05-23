@@ -84,6 +84,10 @@ $primary-color: #3c74ff;
     &:hover {
       opacity: 1 !important;
     }
+
+    &:active {
+      opacity: 1 !important;
+    }
   }
 
   .col-resize {
@@ -91,7 +95,7 @@ $primary-color: #3c74ff;
     width: 4px;
 
     &:hover {
-      cursor: col-resize;
+      cursor: e-resize;
     }
   }
 
@@ -100,7 +104,7 @@ $primary-color: #3c74ff;
     height: 4px;
 
     &:hover {
-      cursor: row-resize;
+      cursor: n-resize;
     }
   }
 
