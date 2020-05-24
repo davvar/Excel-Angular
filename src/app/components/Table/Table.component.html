@@ -1,53 +1,74 @@
 <div class="excel__table" #table>
   <div class="row">
     <div (click)="highlight($event.target, table)" class="row-info"></div>
-    <div class="row-data">
-      <div
-        #colRef
-        (click)="highlight(colRef, table, prevCol + 1)"
-        data-type="col"
-        *ngFor="let charCode of columns; let prevCol = index"
-        [ngClass]="[
-          'column',
-          shouldHighlight(colRef, prevCol + 1) ? 'highlightHeader' : ''
-        ]"
-      >
-        {{ charCode | fromCharCode }}
+
+    <ng-container *ngFor="let charCode of columns; let prevCol = index">
+      <div class="row-data">
         <div
-          [ngStyle]="resizer.styles"
-          (mousedown)="resizer.startResizing($event, table)"
-          data-direction="X"
-          class="col-resize"
+          *ngLet="'col:' + (prevCol + 1) as id"
+          #colRef
+          (click)="highlight(colRef, table, prevCol + 1)"
+          data-type="col"
+          [ngStyle]="resizer.target.id === id ? resizer.target.styles : {}"
+          [ngClass]="[
+            'column',
+            shouldHighlight(colRef, prevCol + 1) ? 'highlightHeader' : ''
+          ]"
         >
+          {{ charCode | fromCharCode }}
+          <div
+            [ngStyle]="resizer.resizerstyles"
+            (mousedown)="resizer.startResizing($event, table)"
+            (click)="resizer.finishResizing($event, id)"
+            data-direction="X"
+            class="col-resize"
+          ></div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 
-  <div *ngFor="let row of rows" class="row">
+  <ng-container *ngFor="let row of rows">
     <div
-      #rowRef
-      (click)="highlight(rowRef, table, row)"
-      [ngClass]="[
-        'row-info',
-        shouldHighlight(rowRef, row) ? 'highlightHeader' : ''
-      ]"
-      data-type="row"
+      *ngLet="'row:' + row as id"
+      [ngStyle]="resizer.target.id === id ? resizer.target.styles : {}"
+      class="row"
     >
-      {{ row }}
-      <div data-direction="Y" class="row-resize"><div></div></div>
-    </div>
-
-    <div class="row-data">
       <div
-        *ngFor="let _ of columns; let i = index"
-        (click)="selectCell(row, i + 1)"
-        [ngClass]="[isSelectedCell(row, i + 1) ? 'selected' : '', 'cell']"
-        data-type="cell"
-        contenteditable
-      ></div>
+        #rowRef
+        (click)="highlight(rowRef, table, row)"
+        [ngClass]="[
+          'row-info',
+          shouldHighlight(rowRef, row) ? 'highlightHeader' : ''
+        ]"
+        data-type="row"
+      >
+        {{ row }}
+        <div
+          [ngStyle]="resizer.resizerstyles"
+          (mousedown)="resizer.startResizing($event, table)"
+          (click)="resizer.finishResizing($event, id)"
+          data-direction="Y"
+          class="row-resize"
+        >
+          <div></div>
+        </div>
+      </div>
+
+      <div class="row-data">
+        <div
+          *ngFor="let _ of columns; let i = index"
+          (click)="selectCell(row, i + 1)"
+          [ngClass]="[isSelectedCell(row, i + 1) ? 'selected' : '', 'cell']"
+          [ngStyle]="
+            resizer.target.id?.includes(i + 1) ? resizer.target.styles : {}
+          "
+          data-type="cell"
+          contenteditable
+        ></div>
+      </div>
     </div>
-  </div>
+  </ng-container>
 
   <div
     [ngStyle]="highlighter.styles"

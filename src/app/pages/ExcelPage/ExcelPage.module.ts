@@ -7,6 +7,7 @@ import { ToolbarComponent } from 'src/app/components/Toolbar/Toolbar.component';
 import { FormulaComponent } from 'src/app/components/Formula/Formula.component';
 import { TableComponent } from 'src/app/components/Table/Table.component';
 import { FromCharCodePipe } from 'src/app/pipes/fromCharCode.pipe';
+import { NgLetDirective } from 'src/app/directives/ngLet.directive';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { FromCharCodePipe } from 'src/app/pipes/fromCharCode.pipe';
     ToolbarComponent,
     FormulaComponent,
     TableComponent,
-    FromCharCodePipe
+    FromCharCodePipe,
+    NgLetDirective
   ],
 })
 export class ExcelPageModule { }

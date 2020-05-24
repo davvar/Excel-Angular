@@ -53,7 +53,6 @@ export class TableComponent implements AfterViewInit {
   }
 
   public highlight(e: HTMLElement, table: HTMLElement, index?: number): void {
-
     this.highlighter.highlight(e, table, index)
 
     e.dataset.type === 'col'
@@ -71,7 +70,7 @@ export class TableComponent implements AfterViewInit {
     let tableSub$ = this.tableEvents$.subscribe(e => {
       const dataType = (e.target as HTMLElement).dataset.type
 
-      if (e.type === 'mousedown' && dataType === 'cell' || dataType === 'highlighter') {
+      if (e.type === 'mousedown' && ['cell', 'highlighter'].includes(dataType)) {
         this.highlighter.destroyHighlighter()
       } else {
         (e.target as HTMLElement).click()
